@@ -1,0 +1,30 @@
+#game {
+  display: grid;
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(20, 20px);
+  margin: 50px auto;
+}
+
+.grass {
+  background-color: green;
+}
+
+.tee {
+  background-color: red;
+}
+
+.hole {
+  background-color: #000;
+}
+
+.water {
+  background-color: deepskyblue;
+}
+
+.bunker {
+  background-color: gold;
+}
+
+.rough {
+  background-color: darkgreen;
+}
