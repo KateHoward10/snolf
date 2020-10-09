@@ -22,18 +22,20 @@ const HOLE = [
 ];
 
 const SQUARE_TYPES = [
-  "grass",
-  "tee",
-  "hole",
-  "water",
-  "bunker",
-  "rough"
+  { name: "grass", colour: "green" },
+  { name: "tee", colour: "red" },
+  { name: "hole", colour: "black" },
+  { name: "water", colour: "deepskyblue" },
+  { name: "bunker", colour: "gold" },
+  { name: "rough", colour: "darkgreen" }
 ];
 
 const game = document.getElementById("game");
+const context = game.getContext("2d");
 
-HOLE.forEach(square => {
-  const div = document.createElement("div");
-  div.classList.add(SQUARE_TYPES[square]);
-  game.appendChild(div);
-})
+HOLE.forEach((square, i) => {
+  if (square > 0 ) {
+    context.fillStyle = SQUARE_TYPES[square].colour;
+    context.fillRect((i % 30) * 20, (i / 30 | 0) * 20, 20, 20);
+  }
+});
