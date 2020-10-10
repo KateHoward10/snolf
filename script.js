@@ -30,12 +30,34 @@ const SQUARE_TYPES = [
   { name: "rough", colour: "darkgreen" }
 ];
 
-const game = document.getElementById("game");
-const context = game.getContext("2d");
-
-HOLE.forEach((square, i) => {
-  if (square > 0 ) {
-    context.fillStyle = SQUARE_TYPES[square].colour;
-    context.fillRect((i % 30) * 20, (i / 30 | 0) * 20, 20, 20);
+class Ball {
+  constructor(x = 300, y = 200) {
+    this.x = x;
+    this.y = y;
   }
-});
+}
+
+class Game {
+  constructor(canvas, hole) {
+    this.canvas = canvas;
+    this.context = canvas.getContext("2d");    
+    hole.forEach((square, i) => {
+      if (square > 0 ) {
+        this.context.fillStyle = SQUARE_TYPES[square].colour;
+        this.context.fillRect((i % 30) * 20, (i / 30 | 0) * 20, 20, 20);
+      }
+    });
+
+    this.ball = new Ball(((hole.indexOf(1) % 30) * 20) + 10, (((hole.indexOf(1) / 30) | 0) * 20) + 10);
+  }
+  
+  drawBall() {
+    this.context.arc(this.ball.x, this.ball.y, 10, 0, 2 * Math.PI, false);
+    this.context.fillStyle = "#fff";
+    this.context.fill();
+  }
+}
+
+const game = new Game(document.getElementById("game"), HOLE);
+
+game.drawBall();
