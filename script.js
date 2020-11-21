@@ -37,6 +37,13 @@ class Ball {
   }
 }
 
+class Club {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
 class Game {
   constructor(canvas, hole) {
     this.canvas = canvas;
@@ -49,6 +56,7 @@ class Game {
     });
 
     this.ball = new Ball(((hole.indexOf(1) % 30) * 20) + 10, (((hole.indexOf(1) / 30) | 0) * 20) + 10);
+    this.club = new Club(this.ball.x - 20, this.ball.y);
   }
   
   drawBall() {
@@ -56,8 +64,18 @@ class Game {
     this.context.fillStyle = "#fff";
     this.context.fill();
   }
+
+  drawClub() {
+    this.context.lineWidth = 10;
+    this.context.strokeStyle = "#996633";
+    this.context.beginPath();
+    this.context.moveTo(this.club.x, this.club.y);
+    this.context.lineTo(this.club.x - 100, this.club.y);
+    this.context.stroke();
+  }
 }
 
 const game = new Game(document.getElementById("game"), HOLE);
 
 game.drawBall();
+game.drawClub();
